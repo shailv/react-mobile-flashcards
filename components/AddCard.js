@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, TextInput} from 'react-native';
+import { Text, View, TouchableOpacity, TextInput} from 'react-native'
 import {addCard} from '../actions/cards'
 import {styles} from '../utils/styles'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import {addCardToDeck} from '../utils/api'
 
 class AddCard extends React.Component{
     constructor(props){
@@ -19,10 +20,12 @@ class AddCard extends React.Component{
             answer: this.state.answer
         }
         
-        this.props.dispatch(addCard(newCard, deck, () => {
+        this.props.dispatch(addCard(newCard, deck));
+
+        //async add card
+        addCardToDeck(deck.title, newCard).then(() => {
             this.props.navigation.navigate('Deck', {deckTitle: deck.title});
-            }
-        ));
+        });
     }
     render(){
         

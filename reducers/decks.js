@@ -19,8 +19,13 @@ export default function decks(state={}, action){
             return state;
         case "ADD_CARD":            
             //update the deck with the new card
-            action.deck.questions.push(action.card);
-            
+            if(action.deck.questions !== undefined){
+                action.deck.questions.push(action.card);
+            }
+            else{
+                action.deck.questions = new Array(1);
+                action.deck.questions.push(action.card);
+            }
             //update state with the new deck
             state[0][action.deck.title] = action.deck;
             return state;

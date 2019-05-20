@@ -1,15 +1,15 @@
 import {createStackNavigator,createAppContainer} from 'react-navigation'
-import Home from "./Home";
 import DeckList from "./DeckList";
 import Deck from "./Deck";
 import AddCard from './AddCard'
 import Quiz from './Quiz'
+import DeckTabs from './TabNavigator'
 
 const AppNavigator = createStackNavigator({
     Home:{
-      screen: Home,
+      screen: DeckTabs,
       navigationOptions: {
-        title:"Mobile Flashcards"
+        title: "Home"
       }
     },
     DeckList: {

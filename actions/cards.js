@@ -13,10 +13,9 @@ function fetchCards(deck){
    }
 }
 
-export function addCard(newCard, deck, callBack){
+export function addCard(newCard, deck){
     return (dispatch) => {
         dispatch(saveCard(newCard, deck));
-        callBack();
     }
 }
 function saveCard(card, deck){

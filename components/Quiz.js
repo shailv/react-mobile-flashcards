@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import {styles} from '../utils/styles';
 import Card from './Card';
+import {setLocalNotification, clearLocalNotification} from '../utils/api';
 
 /**
  * @description: Display all cards for the quiz
@@ -35,6 +36,10 @@ class Quiz extends React.Component{
                 displayResult: (newQuestionNumber > questionCount) ? true : false
             }
         });
+
+        //clear today's notification and set it for tomorrow
+        clearLocalNotification()
+            .then(setLocalNotification)
     }
     render(){
         const {navigation} = this.props;        

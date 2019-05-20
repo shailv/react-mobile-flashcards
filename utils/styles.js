@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     deckOuter: {
+        backgroundColor: '#fff',
         borderStyle: 'solid',
         borderColor: '#ccc',
         borderWidth: 1,

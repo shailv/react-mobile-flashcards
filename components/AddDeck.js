@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import {addDeck} from '../actions/decks'
 import {styles} from '../utils/styles'
 import { connect } from 'react-redux';
+import {saveDeckTitle} from '../utils/api'
 
 class AddDeck extends React.Component{
     constructor(props){
@@ -23,6 +24,9 @@ class AddDeck extends React.Component{
             this.props.navigation.navigate('DeckList');
             }
         ));
+        
+        //async add deck
+        saveDeckTitle(this.state.deckTitle);
     }
     render(){
         return(

@@ -1,15 +1,19 @@
 import React from "react";
-import { View, StatusBar } from "react-native";
+import { View } from "react-native";
 import { connect } from "react-redux";
-import DeckTabs from './TabNavigator'
 import {styles} from '../utils/styles'
+import {setLocalNotification} from '../utils/api'
+import {getAllDecks} from '../actions/decks';
 
 class Home extends React.Component {
+  componentDidMount(){
+    setLocalNotification();
+    //fetch decks
+    this.props.dispatch(getAllDecks());
+  }
   render() {
-    const { navigation } = this.props;
     return (
       <View style={styles.container}> 
-        <DeckTabs screenProps={ {navigation: navigation}}/>
       </View>
     );
   }
@@ -21,5 +25,3 @@ function mapStateToProps(state) {
     }
 }
 export default connect(mapStateToProps)(Home);
-
-
