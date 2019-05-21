@@ -1,38 +1,46 @@
 import React, { Component } from "react";
-import {StyleSheet, Text,View,TouchableOpacity,StatusBar, FlatList} from "react-native";
+import { Text, View, TouchableOpacity, StatusBar } from "react-native";
 import { connect } from "react-redux";
 import { styles } from "../utils/styles";
 import { getAllDecks } from "../actions/decks";
-import {withNavigationFocus} from 'react-navigation'
+import { withNavigationFocus } from "react-navigation";
 import { ScrollView } from "react-native-gesture-handler";
-import {getInitialDecks, getDecks, DECKS_KEY} from '../utils/api'
-import {AsyncStorage}from 'react-native'
-import {MaterialCommunityIcons} from '@expo/vector-icons'
+import { getDecks } from "../utils/api";
 
+/**
+ * @description Display all the decks
+ */
 class DeckList extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     state = {
       isLoading: true
-    }
+    };
   }
-  fetchData(){
-    getDecks().then(results => {
-        this.setState(() => ({
-          decks: results,
-          isLoading: false
-        }))
-    });
-  }
+
+  /**
+   * @description Fetch data whenever this component is in focus
+   */
   componentDidMount() {
     this.props.dispatch(getAllDecks());
 
     this.didFocusSubscription = this.props.navigation.addListener(
-      'didFocus',
+      "didFocus",
       () => {
         this.fetchData();
       }
     );
+  }
+  /**
+   * @description Fetch data for all the decks
+   */
+  fetchData() {
+    getDecks().then(results => {
+      this.setState(() => ({
+        decks: results,
+        isLoading: false
+      }));
+    });
   }
   render() {
     var deckObject = {};
@@ -43,42 +51,42 @@ class DeckList extends Component {
     }
     const { navigation } = this.props;
 
-    //AsyncStorage.removeItem(DECKS_KEY)
     return (
-        <ScrollView>
-          {this.state !== null && this.state.isLoading ? 
+      <ScrollView>
+        {this.state !== null && this.state.isLoading ? (
           <View>
             <Text>Loading</Text>
           </View>
-          : 
+        ) : (
           <View>
-          {this.state !== null && (
+            {this.state !== null && (
               <View style={[styles.container, styles.centerContent]}>
-              <View style={styles.statusBar}>
+                <View style={styles.statusBar}>
                   <StatusBar barStyle="light-content" />
-              </View>
-              {allDecks.map(deck => (
+                </View>
+                {allDecks.map(deck => (
                   <View key={deck.title}>
-                  <TouchableOpacity
+                    <TouchableOpacity
                       onPress={() =>
-                      navigation.navigate("Deck", { deckTitle: deck.title })
+                        navigation.navigate("Deck", { deckTitle: deck.title })
                       }
-                  >
+                    >
                       <View style={styles.deckOuter}>
                         <Text style={styles.deckTitle}>{deck.title}</Text>
                         <Text style={styles.deckSubtitle}>
-                        {deck.questions !== undefined ? deck.questions.length + " cards" : "0 cards"}
+                          {deck.questions !== undefined
+                            ? deck.questions.length + " cards"
+                            : "0 cards"}
                         </Text>
                       </View>
-                  </TouchableOpacity>
+                    </TouchableOpacity>
                   </View>
-              ))}
+                ))}
               </View>
-          )}
+            )}
           </View>
-        }
+        )}
       </ScrollView>
-
     );
   }
 }

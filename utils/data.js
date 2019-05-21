@@ -1,3 +1,6 @@
+/**
+ * @description Initial data to display decks
+ */
 let decks = {
   React: {
     title: "React",
