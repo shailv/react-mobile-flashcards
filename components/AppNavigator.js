@@ -5,6 +5,9 @@ import AddCard from './AddCard'
 import Quiz from './Quiz'
 import DeckTabs from './TabNavigator'
 
+/**
+ * @description Stack navigator for all the screens
+ */
 const AppNavigator = createStackNavigator({
     Home:{
       screen: DeckTabs,

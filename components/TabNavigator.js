@@ -2,6 +2,9 @@ import {createMaterialTopTabNavigator, createAppContainer} from 'react-navigatio
 import DeckList from "./DeckList";
 import AddDeck from './AddDeck'
 
+/**
+ * @description Tsb navigator for Decklist and New Deck screens
+ */
 const DeckTabs = createMaterialTopTabNavigator({
     DeckList: {
         screen: DeckList,
@@ -12,11 +15,13 @@ const DeckTabs = createMaterialTopTabNavigator({
     AddDeck: {
         screen: AddDeck,
         navigationOptions:{
-            title: 'Create Deck'
+            title: 'New Deck'
         }
     }
 },
-{
+{        
+    initialRouteName: 'DeckList',
+    backBehavior: 'initialRoute',
     tabBarOptions: {
         order: ['DeckList', 'AddDeck'],
         labelStyle: {

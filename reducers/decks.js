@@ -1,7 +1,9 @@
+/**
+ * @description Decks reducer
+ */
 export default function decks(state={}, action){
     switch(action.type){
         case 'RETRIEVE_DECKS':
-            //add action.decks to state if it is empty
             if(Object.keys(state).length == 0){
                 return {
                     ...state,

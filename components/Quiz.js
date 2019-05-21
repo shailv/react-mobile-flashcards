@@ -12,7 +12,7 @@ class Quiz extends React.Component{
     constructor(props){
         super(props);
         var questionCount = 0;
-        console.log(props.navigation);
+
         if(props.navigation !== undefined){
             questionCount = props.navigation.getParam('deck').questions.length;
         }
@@ -41,6 +41,20 @@ class Quiz extends React.Component{
         clearLocalNotification()
             .then(setLocalNotification)
     }
+    restartQuiz = () => {
+        var questionCount = 0;
+
+        if(this.props.navigation !== undefined){
+            questionCount = this.props.navigation.getParam('deck').questions.length;
+        }
+        this.setState(() => ({
+            questionsAnswered: 0,
+            totalQuestions: questionCount,
+            questionNumber: 1,
+            displayResult: false
+        }))
+    }
+
     render(){
         const {navigation} = this.props;        
         const deck = navigation.getParam('deck')
@@ -58,13 +72,17 @@ class Quiz extends React.Component{
                     }
                 </View>
             :
-                <View>
+                <View style={styles.centerContent}>
                     <Text style={styles.deckTitle}>Your Quiz Score</Text>
                     <Text style={styles.deckSubtitle}>{this.state.questionsAnswered} / {this.state.totalQuestions}</Text>
                     <Text style={styles.deckSubtitle}>{this.state.questionsAnswered / this.state.totalQuestions * 100}%</Text>
 
                     <TouchableOpacity onPress={() => navigation.navigate('Deck', {deckTitle: deck.title})} style={[styles.button, styles.submitBtn]}>
                         <Text style={styles.buttonText}>Back to Deck</Text> 
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity style={[styles.button, styles.quizBtn]} onPress={this.restartQuiz}>
+                        <Text style={styles.buttonText}>Restart Quiz</Text>
                     </TouchableOpacity>
                 </View>
             }

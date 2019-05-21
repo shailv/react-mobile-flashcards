@@ -5,6 +5,7 @@ import {DECKS_KEY} from '../utils/api'
 const RETRIEVE_DECKS = 'RETRIEVE_DECKS'
 const FETCH_DECK = 'FETCH_DECK'
 const ADD_DECK = 'ADD_DECK'
+const ADD_CARD = 'ADD_CARD'
 
 export function getDeck(title){
     return(dispatch) => {
@@ -53,6 +54,19 @@ export function addDeck(deck, callBack){
 function saveDeck(deck){
     return{
         type: ADD_DECK,
+        deck
+    }
+}
+
+export function addCard(newCard, deck){
+    return (dispatch) => {
+        dispatch(saveCard(newCard, deck));
+    }
+}
+function saveCard(card, deck){
+    return{
+        type: ADD_CARD,
+        card,
         deck
     }
 }

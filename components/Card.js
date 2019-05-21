@@ -94,6 +94,7 @@ class Card extends React.Component{
                         <Animated.View style={flipStyle.card} >
                             <Animated.View style={[flipStyle.front, this.front()]}>
                                 <Text style={flipStyle.text}>{card.question}</Text>
+                                <Text style={flipStyle.subtext}>Click to view answer</Text>
                             </Animated.View>
                             <Animated.View style={[flipStyle.back, this.back()]}>
                                 <Text style={flipStyle.text}>{card.answer}</Text>
@@ -148,6 +149,11 @@ const flipStyle = StyleSheet.create({
     },
     text: {
         fontSize: 20
+    },
+    subtext:{
+        fontSize: 18,
+        color:'#6495ed',
+        paddingTop: 20
     }
 })
 export default connect()(Card)
