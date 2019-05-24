@@ -63,6 +63,9 @@ export const styles = StyleSheet.create({
     quizBtn: {
         backgroundColor: '#6495ed'
     },
+    quizBtnDisabled: {
+        backgroundColor: '#999999'
+    },
     correctBtn:{
         backgroundColor: '#9acd32'
     },
