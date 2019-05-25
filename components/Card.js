@@ -152,7 +152,7 @@ const flipStyle = StyleSheet.create({
     front: {
         width: 300,
         height: 300,
-        borderColor: '#ccc',
+        borderColor: '#6495ed',
         borderWidth: 2,
         borderRadius: 5,
         backfaceVisibility: 'hidden',

@@ -65,7 +65,7 @@ class Quiz extends React.Component{
             {/* //If all questions have been answered, display the result */}
             {(!this.state.displayResult) ? 
                 <View>
-                    <Text style={styles.deckSubtitle}>{this.state.questionsAnswered} / {this.state.totalQuestions}</Text>
+                    <Text style={styles.deckSubtitle}>{this.state.questionNumber} / {this.state.totalQuestions}</Text>
 
                     {(deck.questions.length > 0) && 
                         <Card card={deck.questions[this.state.questionNumber - 1]} logAnswer={this.logAnswer}/>
